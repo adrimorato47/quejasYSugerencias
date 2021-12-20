@@ -5,14 +5,18 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class Insert {
 	
 	ConnectionJDBC db = new ConnectionJDBC();
+	VentanaForm vf = new VentanaForm();
 	static final String TABLA = "qys";
 	
+	/*public void insertar(String fecha, String nombre, String apellidos, String estamento, String descripcion, String fecha_deteccion,
+			String propuesta_mejora, String medio_respuesta, String fecha_realizacion_sugerencia, String fecha_comunicacion_responsable_proceso, 
+			String fecha_respuesta, String contestacion) {*/
 	public void insertar(String fecha, String nombre, String apellidos, String estamento, String descripcion, String fecha_deteccion,
-			
 			String propuesta_mejora, String medio_respuesta, String fecha_realizacion_sugerencia, String fecha_comunicacion_responsable_proceso, 
 			String fecha_respuesta, String contestacion) {
 		
@@ -29,7 +33,7 @@ public class Insert {
 					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps = db.connection_.prepareStatement(sql);
 			
-			System.out.println("Fecha");
+			/*System.out.println("Fecha");
 			fecha = sc.nextLine();
 			System.out.println("Nombre");
 			nombre = sc.nextLine();
@@ -52,7 +56,19 @@ public class Insert {
 			System.out.println("Fecha de respuesta");
 			fecha_respuesta = sc.nextLine();
 			System.out.println("Contestación");
-			contestacion = sc.nextLine();
+			contestacion = sc.nextLine();*/
+			
+
+			String fecha1 = vf.getTextFecha().getText();
+			fecha = fecha1;
+			
+			String nombre1 = vf.getTextNombre().getText();
+			nombre = nombre1;
+			
+			String apellidos1 = vf.getTextApellidos().getText();
+			apellidos = apellidos1;
+			
+			String estamento1 = 
 			
 			ps.setString(1, fecha);
 			ps.setString(2, nombre);

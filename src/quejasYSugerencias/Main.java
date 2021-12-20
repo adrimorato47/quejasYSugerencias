@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Scanner sc = new Scanner(System.in);
+		/*Scanner sc = new Scanner(System.in);
 		ConnectionJDBC conn = new ConnectionJDBC();
 		Select s = new Select();
 		Insert i = new Insert();
@@ -33,6 +33,9 @@ public class Main {
 					d.eliminar(id); 
 					break;
 			case 4: break;
-		}	
+		}	*/
+		
+		VentanaPrincipal vp = new VentanaPrincipal();
+		vp.setVisible(true);
 	}
 }
