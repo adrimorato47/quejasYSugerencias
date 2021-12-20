@@ -22,22 +22,18 @@ public class Delete {
 		return num;
 	}
  
-	
 	public void eliminar(int id) {
 		
 		PreparedStatement ps; 
 		
 		try {
 
-			String consulta = "DELETE FROM" + TABLA + " WHERE id = ? ";
-			ps = db.connection_.prepareStatement(consulta);
-			ps.setInt(1, id);
-			ps.executeUpdate(consulta);
+			String sql = "DELETE FROM " + TABLA + " WHERE id = "+id;
+			ps = ConnectionJDBC.connection_.prepareStatement(sql);
+			ps.executeUpdate(sql);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 }

@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		Scanner sc = new Scanner(System.in);
 		ConnectionJDBC conn = new ConnectionJDBC();
@@ -24,11 +23,7 @@ public class Main {
 		int opcion = sc.nextInt();
 		
 		String campouno="", campodos ="", campotres ="", campocuatro="", campocinco="", camposeis="", 
-				camposiete="", campoocho="", camponueve="", campodiez="", campoonce="", campodoce="";
-		
-		//int delete = d.numero();
-		
-		
+				camposiete="", campoocho="", camponueve="", campodiez="", campoonce="", campodoce="";	
 		
 		switch (opcion) {
 			case 1: s.Consulta(); break;
@@ -38,9 +33,6 @@ public class Main {
 					d.eliminar(id); 
 					break;
 			case 4: break;
-		}
-		
-
+		}	
 	}
-
 }

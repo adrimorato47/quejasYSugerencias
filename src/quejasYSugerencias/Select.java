@@ -35,5 +35,4 @@ public class Select {
             System.out.println("Error al ejecutar SQL en servidor MySQL/MariaDB: " + error.getMessage());
         }
 	}
-
 }

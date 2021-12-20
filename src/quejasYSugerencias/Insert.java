@@ -12,13 +12,12 @@ public class Insert {
 	static final String TABLA = "qys";
 	
 	public void insertar(String fecha, String nombre, String apellidos, String estamento, String descripcion, String fecha_deteccion,
+			
 			String propuesta_mejora, String medio_respuesta, String fecha_realizacion_sugerencia, String fecha_comunicacion_responsable_proceso, 
 			String fecha_respuesta, String contestacion) {
 		
-		
 		PreparedStatement ps;
 		String sql;
-		
 		
 		Scanner sc =new Scanner(System.in);
 		
@@ -75,5 +74,4 @@ public class Insert {
 			System.out.println("No se han introducido los datos: " + error);
 		}
 	}
-
 }
