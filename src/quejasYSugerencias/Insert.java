@@ -68,8 +68,35 @@ public class Insert {
 			String apellidos1 = vf.getTextApellidos().getText();
 			apellidos = apellidos1;
 			
-			String estamento1 = 
+			String estamento1 = vf.getEstamento();
+			estamento = estamento1;
 			
+			String descripcion1 = vf.getDescripcion();
+			descripcion = descripcion1;
+			
+			String fecha_deteccion1 = vf.getTextFecha_deteccion().toString();
+			fecha_deteccion = fecha_deteccion1;
+			
+			String propuesta_mejora1 = vf.getPropuestaMejora().toString();
+			propuesta_mejora = propuesta_mejora1;
+			
+			String medio_respuesta1 = vf.getTextMedio_respuesta().toString();
+			medio_respuesta = medio_respuesta1;
+			
+			String fecha_realizacion_sugerencia1 = vf.getTextFecha_realizacion_sugerencia().toString();
+			fecha_realizacion_sugerencia = fecha_realizacion_sugerencia1;
+			
+			String fecha_comunicacion_responsable_proceso1 = vf.getTextFecha_comunicacion_responsable_proceso().toString();
+			fecha_comunicacion_responsable_proceso = fecha_comunicacion_responsable_proceso1;
+			
+			String fecha_respuesta1 = vf.getTextFecha_respuesta().toString();
+			fecha_respuesta = fecha_respuesta1;
+			
+			String contestacion1 = vf.getContestacion();
+			contestacion = contestacion1;	
+			
+		/*	https://codigosdeprogramacion.com/cursos/?lesson=3-crud-en-java-y-mysql */
+				
 			ps.setString(1, fecha);
 			ps.setString(2, nombre);
 			ps.setString(3, apellidos);
@@ -83,10 +110,12 @@ public class Insert {
 			ps.setString(11, fecha_respuesta);
 			ps.setString(12, contestacion);
 			
+			
 			ps.executeUpdate();
 	        JOptionPane.showMessageDialog(null, "Se han insertado los datos");
 		}catch(SQLException error){
             //JOptionPane.showMessageDialog(null, "Error de conexión:");
+			JOptionPane.showMessageDialog(null, "No se han insertado los datos: "+ error);
 			System.out.println("No se han introducido los datos: " + error);
 		}
 	}

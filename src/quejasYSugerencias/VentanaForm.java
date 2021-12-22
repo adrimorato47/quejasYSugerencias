@@ -31,7 +31,34 @@ public class VentanaForm extends JFrame {
 	private JTextField textFecha_comunicacion_responsable_proceso;
 	private JTextField textFecha_respuesta;
 	private final Action action = new SwingAction();
+	private final Action action_1 = new SwingAction_1();
 	private JTextField textFecha;
+	
+	String estamento1 = "";	
+	String descripcion1 = "";
+	String propuestaMejora1 = "";
+	String contestacion1 = "";
+	
+	String fecha = textFecha.toString();
+	String nombre = textNombre.toString();
+	String apellidos = textApellidos.toString();
+	String fecha_deteccion = textFecha_deteccion.toString();
+	String medio_respuesta = textMedio_respuesta.toString();
+	String fecha_realizacion_sugerencia = textFecha_realizacion_sugerencia.toString();
+	String fecha_comunicacion_responsable_proceso = textFecha_comunicacion_responsable_proceso.toString();
+	String fecha_respuesta = textFecha_respuesta.toString();
+	String estamento = estamento1;
+		/*String fecha = "";
+	String nombre = "";
+	String apellidos = "";
+	String fecha_deteccion = "";
+	String medio_respuesta = "";
+	String fecha_realizacion_sugerencia = "";
+	String fecha_comunicacion_responsable_proceso = "";
+	String fecha_respuesta = "";
+	String estamento = "";*/
+	
+	
 
 	/**
 	 * Launch the application.
@@ -75,6 +102,8 @@ public class VentanaForm extends JFrame {
 		comboBoxEstamento.setModel(new DefaultComboBoxModel(new String[] {"Otro", "PAS", "Estudiante", "Profesor"}));
 		comboBoxEstamento.setBounds(438, 42, 111, 22);
 		contentPane.add(comboBoxEstamento);
+		
+		estamento1 = comboBoxEstamento.toString();
 		
 		JLabel lblNewLabel_2 = new JLabel("Estamento:");
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -144,6 +173,7 @@ public class VentanaForm extends JFrame {
 		JTextArea textAreaDescripcion = new JTextArea();
 		textAreaDescripcion.setBounds(10, 155, 1152, 109);
 		contentPane.add(textAreaDescripcion);
+		descripcion1 = textAreaDescripcion.toString();
 		
 		textFecha_deteccion = new JTextField();
 		textFecha_deteccion.setBounds(713, 45, 111, 19);
@@ -178,14 +208,27 @@ public class VentanaForm extends JFrame {
 		JTextArea textAreaPropuesta_mejora = new JTextArea();
 		textAreaPropuesta_mejora.setBounds(10, 309, 1152, 109);
 		contentPane.add(textAreaPropuesta_mejora);
+		propuestaMejora1 = textAreaPropuesta_mejora.toString();
 		
 		JTextArea textAreaContestacion = new JTextArea();
 		textAreaContestacion.setBounds(10, 454, 1152, 109);
 		contentPane.add(textAreaContestacion);
+		contestacion1 = textAreaContestacion.toString();
 		
 		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Insert i = new Insert();
+				i.insertar(fecha, nombre, apellidos, estamento, descripcion1, fecha_deteccion, propuestaMejora1, medio_respuesta,
+						fecha_realizacion_sugerencia, fecha_comunicacion_responsable_proceso, fecha_respuesta, contestacion1);
+				VentanaPrincipal vp = new VentanaPrincipal();
+				vp.setVisible(true);
+				dispose();
+			}
+		});
+		btnEnviar.setAction(action_1);
 		btnEnviar.setFont(new Font("Arial", Font.BOLD, 16));
-		btnEnviar.setBounds(1073, 585, 89, 23);
+		btnEnviar.setBounds(1073, 587, 89, 23);
 		contentPane.add(btnEnviar);
 		
 		JButton btnAtras = new JButton("Atr\u00E1s");
@@ -203,74 +246,66 @@ public class VentanaForm extends JFrame {
 	}
 	
 	//getters y setters
+	public String getDescripcion () {
+		return descripcion1;
+	}
+	
+	public String getContestacion () {
+		return contestacion1;
+	}
+	
+	public String getPropuestaMejora() {
+		return propuestaMejora1;
+	}
+	
+	public String getEstamento() {
+		return estamento1;
+	}
 	
 	public JTextField getTextNombre() {
 		return textNombre;
-	}
-
-	public void setTextNombre(JTextField textNombre) {
-		this.textNombre = textNombre;
 	}
 
 	public JTextField getTextApellidos() {
 		return textApellidos;
 	}
 
-	public void setTextApellidos(JTextField textApellidos) {
-		this.textApellidos = textApellidos;
-	}
-
 	public JTextField getTextFecha_deteccion() {
 		return textFecha_deteccion;
-	}
-
-	public void setTextFecha_deteccion(JTextField textFecha_deteccion) {
-		this.textFecha_deteccion = textFecha_deteccion;
 	}
 
 	public JTextField getTextMedio_respuesta() {
 		return textMedio_respuesta;
 	}
 
-	public void setTextMedio_respuesta(JTextField textMedio_respuesta) {
-		this.textMedio_respuesta = textMedio_respuesta;
-	}
-
 	public JTextField getTextFecha_realizacion_sugerencia() {
 		return textFecha_realizacion_sugerencia;
-	}
-
-	public void setTextFecha_realizacion_sugerencia(JTextField textFecha_realizacion_sugerencia) {
-		this.textFecha_realizacion_sugerencia = textFecha_realizacion_sugerencia;
 	}
 
 	public JTextField getTextFecha_comunicacion_responsable_proceso() {
 		return textFecha_comunicacion_responsable_proceso;
 	}
 
-	public void setTextFecha_comunicacion_responsable_proceso(JTextField textFecha_comunicacion_responsable_proceso) {
-		this.textFecha_comunicacion_responsable_proceso = textFecha_comunicacion_responsable_proceso;
-	}
-
 	public JTextField getTextFecha_respuesta() {
 		return textFecha_respuesta;
-	}
-
-	public void setTextFecha_respuesta(JTextField textFecha_respuesta) {
-		this.textFecha_respuesta = textFecha_respuesta;
 	}
 
 	public JTextField getTextFecha() {
 		return textFecha;
 	}
-
-	public void setTextFecha(JTextField textFecha) {
-		this.textFecha = textFecha;
-	}
+	
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			putValue(NAME, "Atrás");
 			putValue(SHORT_DESCRIPTION, "Volver a la pantalla principal");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
+	private class SwingAction_1 extends AbstractAction {
+		public SwingAction_1() {
+			putValue(NAME, "Enviar");
+			putValue(SHORT_DESCRIPTION, "Enviar formulario");
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
