@@ -7,9 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
+import java.awt.TextArea;
 import java.awt.Component;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -19,6 +21,8 @@ import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class VentanaForm extends JFrame {
 
@@ -30,34 +34,17 @@ public class VentanaForm extends JFrame {
 	private JTextField textFecha_realizacion_sugerencia;
 	private JTextField textFecha_comunicacion_responsable_proceso;
 	private JTextField textFecha_respuesta;
+	private JTextField textDescripcion;
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 	private JTextField textFecha;
-	
-	String estamento1 = "";	
-	String descripcion1 = "";
-	String propuestaMejora1 = "";
-	String contestacion1 = "";
-	
-	String fecha = textFecha.toString();
-	String nombre = textNombre.toString();
-	String apellidos = textApellidos.toString();
-	String fecha_deteccion = textFecha_deteccion.toString();
-	String medio_respuesta = textMedio_respuesta.toString();
-	String fecha_realizacion_sugerencia = textFecha_realizacion_sugerencia.toString();
-	String fecha_comunicacion_responsable_proceso = textFecha_comunicacion_responsable_proceso.toString();
-	String fecha_respuesta = textFecha_respuesta.toString();
-	String estamento = estamento1;
-		/*String fecha = "";
-	String nombre = "";
-	String apellidos = "";
-	String fecha_deteccion = "";
-	String medio_respuesta = "";
-	String fecha_realizacion_sugerencia = "";
-	String fecha_comunicacion_responsable_proceso = "";
-	String fecha_respuesta = "";
-	String estamento = "";*/
-	
+	public TextArea textAreaDescripcion;
+	public TextArea textAreaContestacion;
+	public TextArea textAreaPropuesta_mejora;
+	public JComboBox<?> estamento;
+	private JTextField textEstamento;
+	private JTextField textPropuesta_mejora;
+	private JTextField textContestacion;
 	
 
 	/**
@@ -97,13 +84,14 @@ public class VentanaForm extends JFrame {
 		lblNewLabel_1.setBounds(192, 42, 74, 22);
 		contentPane.add(lblNewLabel_1);
 		
-		JComboBox comboBoxEstamento = new JComboBox();
+		/*JComboBox comboBoxEstamento = new JComboBox();
 		comboBoxEstamento.setFont(new Font("Arial", Font.PLAIN, 16));
 		comboBoxEstamento.setModel(new DefaultComboBoxModel(new String[] {"Otro", "PAS", "Estudiante", "Profesor"}));
 		comboBoxEstamento.setBounds(438, 42, 111, 22);
 		contentPane.add(comboBoxEstamento);
+		String estamento1 = comboBoxEstamento.toString();*/
 		
-		estamento1 = comboBoxEstamento.toString();
+		/*estamento1 = comboBoxEstamento.toString();*/
 		
 		JLabel lblNewLabel_2 = new JLabel("Estamento:");
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -159,36 +147,48 @@ public class VentanaForm extends JFrame {
 		textFecha.setColumns(10);
 		textFecha.setBounds(58, 99, 111, 19);
 		contentPane.add(textFecha);
+		String fecha1 = textFecha.toString();
 		
 		textNombre = new JTextField();
 		textNombre.setBounds(70, 45, 111, 20);
 		contentPane.add(textNombre);
 		textNombre.setColumns(10);
+		String nombre1 = textNombre.toString();
 		
 		textApellidos = new JTextField();
 		textApellidos.setBounds(262, 45, 86, 20);
 		contentPane.add(textApellidos);
 		textApellidos.setColumns(10);
+		String apellidos1 = textApellidos.toString();
 		
-		JTextArea textAreaDescripcion = new JTextArea();
+		
+		textDescripcion = new JTextField();
+		textDescripcion.setBounds(10, 155, 1152, 131);
+		contentPane.add(textDescripcion);
+		textDescripcion.setColumns(10);
+		String descripcion1 = textDescripcion.toString();
+		/*JTextArea textAreaDescripcion = new JTextArea();
 		textAreaDescripcion.setBounds(10, 155, 1152, 109);
 		contentPane.add(textAreaDescripcion);
-		descripcion1 = textAreaDescripcion.toString();
+		String descripcion1 = textAreaDescripcion.toString();*/
 		
 		textFecha_deteccion = new JTextField();
 		textFecha_deteccion.setBounds(713, 45, 111, 19);
 		contentPane.add(textFecha_deteccion);
 		textFecha_deteccion.setColumns(10);
+		String fecha_deteccion1 = textFecha_deteccion.toString();
 		
 		textMedio_respuesta = new JTextField();
 		textMedio_respuesta.setBounds(979, 45, 183, 20);
 		contentPane.add(textMedio_respuesta);
 		textMedio_respuesta.setColumns(10);
+		String medio_respuesta1 = textMedio_respuesta.toString();
 		
 		textFecha_realizacion_sugerencia = new JTextField();
 		textFecha_realizacion_sugerencia.setBounds(435, 99, 111, 20);
 		contentPane.add(textFecha_realizacion_sugerencia);
 		textFecha_realizacion_sugerencia.setColumns(10);
+		String fecha_realizacion_sugerencia1 = textFecha_realizacion_sugerencia.toString();
 		
 		JLabel lblNewLabel_11 = new JLabel("al responsable del proceso:");
 		lblNewLabel_11.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -199,29 +199,97 @@ public class VentanaForm extends JFrame {
 		textFecha_comunicacion_responsable_proceso.setColumns(10);
 		textFecha_comunicacion_responsable_proceso.setBounds(754, 99, 111, 20);
 		contentPane.add(textFecha_comunicacion_responsable_proceso);
+		String fecha_comunicacion_responsable_proceso1 = textFecha_comunicacion_responsable_proceso.toString();
 		
 		textFecha_respuesta = new JTextField();
 		textFecha_respuesta.setColumns(10);
 		textFecha_respuesta.setBounds(1015, 99, 111, 20);
 		contentPane.add(textFecha_respuesta);
+		String fecha_respuesta1 = textFecha_respuesta.toString();
 		
-		JTextArea textAreaPropuesta_mejora = new JTextArea();
+		
+		
+		/*JTextArea textAreaPropuesta_mejora = new JTextArea();
 		textAreaPropuesta_mejora.setBounds(10, 309, 1152, 109);
 		contentPane.add(textAreaPropuesta_mejora);
-		propuestaMejora1 = textAreaPropuesta_mejora.toString();
+		String propuestaMejora1 = textAreaPropuesta_mejora.toString();*/
 		
-		JTextArea textAreaContestacion = new JTextArea();
+		/*JTextArea textAreaContestacion = new JTextArea();
 		textAreaContestacion.setBounds(10, 454, 1152, 109);
 		contentPane.add(textAreaContestacion);
-		contestacion1 = textAreaContestacion.toString();
+		String contestacion1 = textAreaContestacion.toString();*/
+		
+		textEstamento = new JTextField();
+		textEstamento.setBounds(435, 45, 124, 20);
+		contentPane.add(textEstamento);
+		textEstamento.setColumns(10);
+		String estamento1 = textEstamento.toString();
+		
+		textPropuesta_mejora = new JTextField();
+		textPropuesta_mejora.setBounds(10, 307, 1152, 111);
+		contentPane.add(textPropuesta_mejora);
+		textPropuesta_mejora.setColumns(10);
+		String propuestaMejora1 = textPropuesta_mejora.toString();
+		
+		textContestacion = new JTextField();
+		textContestacion.setColumns(10);
+		textContestacion.setBounds(10, 454, 1152, 111);
+		contentPane.add(textContestacion);
+		String contestacion1 = textContestacion.toString();
+		
 		
 		JButton btnEnviar = new JButton("Enviar");
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Insert i = new Insert();
-				i.insertar(fecha, nombre, apellidos, estamento, descripcion1, fecha_deteccion, propuestaMejora1, medio_respuesta,
-						fecha_realizacion_sugerencia, fecha_comunicacion_responsable_proceso, fecha_respuesta, contestacion1);
+				ConnectionJDBC conn = new ConnectionJDBC();
+				
+				conn.ConnectionJDBC();
+				String sql;
+				PreparedStatement ps;
+				
+				try {
+					
+					sql = "INSERT INTO qys(fecha, nombre, apellidos, estamento, descripcion, fecha_deteccion, propuesta_mejora,"
+							+ " medio_respuesta, fecha_realizacion_sugerencia, fecha_comunicacion_responsable_proceso,"
+							+ " fecha_respuesta, contestacion) "
+							+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+					
+					ps = conn.connection_.prepareStatement(sql);			
+
+					
+					
+					/*String contestacion1 = vf.getContestacion();
+					contestacion = contestacion1;*/	
+					
+				/*	https://codigosdeprogramacion.com/cursos/?lesson=3-crud-en-java-y-mysql */
+						
+					ps.setString(1, fecha1);
+					ps.setString(2, nombre1);
+					ps.setString(3, apellidos1);
+					ps.setString(4, estamento1);
+					ps.setString(5, descripcion1);
+					ps.setString(6, fecha_deteccion1);
+					ps.setString(7, propuestaMejora1);
+					ps.setString(8, medio_respuesta1);
+					ps.setString(9, fecha_realizacion_sugerencia1);
+					ps.setString(10, fecha_comunicacion_responsable_proceso1);
+					ps.setString(11, fecha_respuesta1);
+					ps.setString(12, contestacion1);
+					
+					
+					ps.executeUpdate();
+			        JOptionPane.showMessageDialog(null, "Se han insertado los datos");
+				}catch(SQLException error){
+		            //JOptionPane.showMessageDialog(null, "Error de conexión:");
+					/*JOptionPane.showMessageDialog(null, "No se han insertado los datos: "+ error);*/
+					System.out.println("No se han introducido los datos: " + error);
+				}
+				/*Insert i = new Insert();
+			
+				i.insertar(fecha1, nombre1, apellidos1, estamento1, descripcion1, fecha_deteccion1, propuestaMejora1, medio_respuesta1,
+						fecha_realizacion_sugerencia1, fecha_comunicacion_responsable_proceso1, fecha_respuesta1, contestacion1);*/
 				VentanaPrincipal vp = new VentanaPrincipal();
+				
 				vp.setVisible(true);
 				dispose();
 			}
@@ -243,24 +311,50 @@ public class VentanaForm extends JFrame {
 		btnAtras.setFont(new Font("Arial", Font.BOLD, 16));
 		btnAtras.setBounds(974, 587, 89, 23);
 		contentPane.add(btnAtras);
+		
+		
+		
+		
 	}
 	
 	//getters y setters
-	public String getDescripcion () {
-		return descripcion1;
+	
+	public JTextField getTextDescripcion () {
+		return textDescripcion;
 	}
 	
+	public JTextField getTextContestacion () {
+		return textContestacion;
+	}
+	
+	public JTextField getTextPropuesta_mejora () {
+		return textPropuesta_mejora;
+	}
+	
+	/*public String getDescripcion () {
+		String descripcion1 = textAreaDescripcion.toString();
+		return descripcion1;
+	}*/
+	
+	public JTextField getTextEstamento() {
+		return textEstamento;
+	}
+
+
 	public String getContestacion () {
+		String contestacion1 = textAreaContestacion.toString();
 		return contestacion1;
 	}
 	
 	public String getPropuestaMejora() {
+		String propuestaMejora1 = textAreaPropuesta_mejora.toString();
 		return propuestaMejora1;
 	}
 	
-	public String getEstamento() {
+	/*public String getEstamento() {
+		String estamento1 = estamento.toString();
 		return estamento1;
-	}
+	}*/
 	
 	public JTextField getTextNombre() {
 		return textNombre;
