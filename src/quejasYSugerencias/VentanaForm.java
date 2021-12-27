@@ -22,7 +22,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class VentanaForm extends JFrame {
 
@@ -147,26 +149,26 @@ public class VentanaForm extends JFrame {
 		textFecha.setColumns(10);
 		textFecha.setBounds(58, 99, 111, 19);
 		contentPane.add(textFecha);
-		String fecha1 = textFecha.toString();
+		String fecha1 = textFecha.getText();
 		
 		textNombre = new JTextField();
 		textNombre.setBounds(70, 45, 111, 20);
 		contentPane.add(textNombre);
 		textNombre.setColumns(10);
-		String nombre1 = textNombre.toString();
+		String nombre1 = textNombre.getText();
 		
 		textApellidos = new JTextField();
 		textApellidos.setBounds(262, 45, 86, 20);
 		contentPane.add(textApellidos);
 		textApellidos.setColumns(10);
-		String apellidos1 = textApellidos.toString();
+		String apellidos1 = textApellidos.getText();
 		
 		
 		textDescripcion = new JTextField();
 		textDescripcion.setBounds(10, 155, 1152, 131);
 		contentPane.add(textDescripcion);
 		textDescripcion.setColumns(10);
-		String descripcion1 = textDescripcion.toString();
+		String descripcion1 = textDescripcion.getText();
 		/*JTextArea textAreaDescripcion = new JTextArea();
 		textAreaDescripcion.setBounds(10, 155, 1152, 109);
 		contentPane.add(textAreaDescripcion);
@@ -176,19 +178,19 @@ public class VentanaForm extends JFrame {
 		textFecha_deteccion.setBounds(713, 45, 111, 19);
 		contentPane.add(textFecha_deteccion);
 		textFecha_deteccion.setColumns(10);
-		String fecha_deteccion1 = textFecha_deteccion.toString();
+		String fecha_deteccion1 = textFecha_deteccion.getText();
 		
 		textMedio_respuesta = new JTextField();
 		textMedio_respuesta.setBounds(979, 45, 183, 20);
 		contentPane.add(textMedio_respuesta);
 		textMedio_respuesta.setColumns(10);
-		String medio_respuesta1 = textMedio_respuesta.toString();
+		String medio_respuesta1 = textMedio_respuesta.getText();
 		
 		textFecha_realizacion_sugerencia = new JTextField();
 		textFecha_realizacion_sugerencia.setBounds(435, 99, 111, 20);
 		contentPane.add(textFecha_realizacion_sugerencia);
 		textFecha_realizacion_sugerencia.setColumns(10);
-		String fecha_realizacion_sugerencia1 = textFecha_realizacion_sugerencia.toString();
+		String fecha_realizacion_sugerencia1 = textFecha_realizacion_sugerencia.getText();
 		
 		JLabel lblNewLabel_11 = new JLabel("al responsable del proceso:");
 		lblNewLabel_11.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -199,13 +201,13 @@ public class VentanaForm extends JFrame {
 		textFecha_comunicacion_responsable_proceso.setColumns(10);
 		textFecha_comunicacion_responsable_proceso.setBounds(754, 99, 111, 20);
 		contentPane.add(textFecha_comunicacion_responsable_proceso);
-		String fecha_comunicacion_responsable_proceso1 = textFecha_comunicacion_responsable_proceso.toString();
+		String fecha_comunicacion_responsable_proceso1 = textFecha_comunicacion_responsable_proceso.getText();
 		
 		textFecha_respuesta = new JTextField();
 		textFecha_respuesta.setColumns(10);
 		textFecha_respuesta.setBounds(1015, 99, 111, 20);
 		contentPane.add(textFecha_respuesta);
-		String fecha_respuesta1 = textFecha_respuesta.toString();
+		String fecha_respuesta1 = textFecha_respuesta.getText();
 		
 		
 		
@@ -223,19 +225,19 @@ public class VentanaForm extends JFrame {
 		textEstamento.setBounds(435, 45, 124, 20);
 		contentPane.add(textEstamento);
 		textEstamento.setColumns(10);
-		String estamento1 = textEstamento.toString();
+		String estamento1 = textEstamento.getText();
 		
 		textPropuesta_mejora = new JTextField();
 		textPropuesta_mejora.setBounds(10, 307, 1152, 111);
 		contentPane.add(textPropuesta_mejora);
 		textPropuesta_mejora.setColumns(10);
-		String propuestaMejora1 = textPropuesta_mejora.toString();
+		String propuestaMejora1 = textPropuesta_mejora.getText();
 		
 		textContestacion = new JTextField();
 		textContestacion.setColumns(10);
 		textContestacion.setBounds(10, 454, 1152, 111);
 		contentPane.add(textContestacion);
-		String contestacion1 = textContestacion.toString();
+		String contestacion1 = textContestacion.getText();
 		
 		
 		JButton btnEnviar = new JButton("Enviar");
@@ -246,24 +248,22 @@ public class VentanaForm extends JFrame {
 				conn.ConnectionJDBC();
 				String sql;
 				PreparedStatement ps;
+				System.out.println("Datos de la variable fecha1: " + fecha1);
+				System.out.println("Datos del JTextField fecha: "+ textFecha);
+				System.out.println("Datos de getFecha: " + getTextFecha());
 				
 				try {
 					
-					sql = "INSERT INTO qys(fecha, nombre, apellidos, estamento, descripcion, fecha_deteccion, propuesta_mejora,"
+					/*sql = "INSERT INTO qys(fecha, nombre, apellidos, estamento, descripcion, fecha_deteccion, propuesta_mejora,"
 							+ " medio_respuesta, fecha_realizacion_sugerencia, fecha_comunicacion_responsable_proceso,"
 							+ " fecha_respuesta, contestacion) "
 							+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 					
-					ps = conn.connection_.prepareStatement(sql);			
+					ps = conn.connection_.prepareStatement(sql);*/			
 
-					
-					
-					/*String contestacion1 = vf.getContestacion();
-					contestacion = contestacion1;*/	
-					
-				/*	https://codigosdeprogramacion.com/cursos/?lesson=3-crud-en-java-y-mysql */
+					/*https://codigosdeprogramacion.com/cursos/?lesson=3-crud-en-java-y-mysql */
 						
-					ps.setString(1, fecha1);
+					/*ps.setString(1, fecha1);
 					ps.setString(2, nombre1);
 					ps.setString(3, apellidos1);
 					ps.setString(4, estamento1);
@@ -274,10 +274,33 @@ public class VentanaForm extends JFrame {
 					ps.setString(9, fecha_realizacion_sugerencia1);
 					ps.setString(10, fecha_comunicacion_responsable_proceso1);
 					ps.setString(11, fecha_respuesta1);
-					ps.setString(12, contestacion1);
+					ps.setString(12, contestacion1);*/
+					
+					String consulta = fecha1+","+nombre1+","+apellidos1+","+estamento1+","+descripcion1+","+fecha_deteccion1+","+propuestaMejora1+","+medio_respuesta1+","+fecha_realizacion_sugerencia1+
+							","+medio_respuesta1+","+fecha_realizacion_sugerencia1+","+fecha_comunicacion_responsable_proceso1+","+fecha_respuesta1+","+contestacion1;
+					
+					sql = "INSERT INTO qys(fecha, nombre, apellidos, estamento, descripcion, fecha_deteccion, propuesta_mejora,"
+							+ " medio_respuesta, fecha_realizacion_sugerencia, fecha_comunicacion_responsable_proceso,"
+							+ " fecha_respuesta, contestacion VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					ResultSet rs = conn. 
 					
 					
-					ps.executeUpdate();
+					
+					
+					/*ps.executeUpdate();*/
+					System.out.println("Fecha: "+fecha1);
+					System.out.println("2. Nombre: "+nombre1);
+					System.out.println("3. Apellidos: "+apellidos1);
+					System.out.println("4. Estamento: "+estamento1);
+					System.out.println("5. Descripcion: "+descripcion1);
+					System.out.println("6. Fecha deteccion: "+fecha_deteccion1);
+					System.out.println("7. Propuesta de mejora: "+propuestaMejora1);
+					System.out.println("8. Medio de respuesta: "+medio_respuesta1);
+					System.out.println("9. Fecha de realizacion de sugerencia: "+fecha_realizacion_sugerencia1);
+					System.out.println("10. Fecha de comunicacion al responsable del proceso: "+fecha_comunicacion_responsable_proceso1);
+					System.out.println("11. Fecha de respuesta: "+fecha_respuesta1);
+					System.out.println("12. Contestacion: "+contestacion1);
+					ps.executeQuery(sql);
 			        JOptionPane.showMessageDialog(null, "Se han insertado los datos");
 				}catch(SQLException error){
 		            //JOptionPane.showMessageDialog(null, "Error de conexión:");
